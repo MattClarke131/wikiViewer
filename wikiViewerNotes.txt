@@ -2,10 +2,54 @@ Wikipedia page viewer Notes
 ================================================================================
 
 CONTENTS
-I. GOALS
+I.    GOALS
+II.   WIKIPEDIA API
+III.  WIKPEDIA API ETIQUETTE
+IV.   WALL: No 'Access-Control-Allow-Origin' header
 
-GOALS
+
+I. GOALS
 ================================================================================
 1. To learn about using APIs by working with wikipedia's API.
 2. To test accross multiple browsers
 3. To approach roadblocks in a patient, and directed matter.
+
+II. WIKIPEDIA API
+================================================================================
+https://www.mediawiki.org/wiki/API:Main_page
+
+"The Endpoint"
+https://en.wikipedia.org/w/api.php
+"The Format"
+format=json
+"The Action"
+action=query
+
+Example:
+https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json
+
+My request:
+Https://en.wikipedia.org/w/api.php?
+
+
+III. WIKIPEDIA API ETIQUETTE
+================================================================================
+https://www.mediawiki.org/wiki/API:Main_page#API_etiquette
+https://www.mediawiki.org/wiki/API:Etiquette
+-Make requests in series, not in parallel
+-Try to combine things into one request
+-Try to cache requests, so you don't have to repeat requests
+  e.g. api.php?....titles=Foo|Bar|Hello
+-Use a descriptive User-Agent header that includes:
+  -application name
+  -potentially an e-mail address if appropriate
+
+
+IV. WALL: No 'Access-Control-Allow-Origin' header
+================================================================================
+According to an answer here: https://stackoverflow.com/questions/32859611/no-access-control-allow-origin-header-is-present-origin-is-therefore-not-allo
+There is a server-side whitelist of who can make CORS requests.
+People in this forum confirm: https://phabricator.wikimedia.org/T62835
+I read here: https://stackoverflow.com/questions/37106041/does-wikipedia-api-support-cors-or-only-jsonp-available
+Apparently it is possible if you just include "origin=*" in the url params.
+This works.
