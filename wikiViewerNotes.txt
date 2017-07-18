@@ -1,0 +1,11 @@
+Wikipedia page viewer Notes
+================================================================================
+
+CONTENTS
+I. GOALS
+
+GOALS
+================================================================================
+1. To learn about using APIs by working with wikipedia's API.
+2. To test accross multiple browsers
+3. To approach roadblocks in a patient, and directed matter.
