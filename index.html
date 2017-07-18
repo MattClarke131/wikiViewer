@@ -5,9 +5,13 @@
   <body>
     <a href="https://en.wikipedia.org/wiki/Special:Random">Click here for a random article</a>
     <form>
-      <input type="text" name="searchTerm">
-      <input type="submit" value="Search">
+      <input type="text" name="formContents">
+      <input type="button" value="Search" onclick="search()">
     </form>
+
+    <div id="results">
+
+    </div>
 
     <script src="main.js"></script>
   </body>

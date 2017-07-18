@@ -17,17 +17,29 @@ function createCORSRequest(method, url) {
   return xhr;
 };
 
-function search(searchterm) {
-  var xhr = createCORSRequest('GET', 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&format=json&search='+searchterm+'&namespace=0&limit=10')
+// I'm not sure how to put this variable inside searchWiki
+var searchResults;
+function searchWiki(searchTerm) {
+  var xhr = createCORSRequest('GET', 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&format=json&search='+searchTerm+'&namespace=0&limit=10')
+
   if(!xhr) {
     throw new Error('CORS not supported');
   };
   xhr.onload = function() {
-    var responseText = JSON.parse(xhr.responseText);
-    console.log(responseText);
+    searchResults = JSON.parse(xhr.responseText);
   };
   xhr.onerror = function() {
     console.log("Error in CORS Request!");
   }
   xhr.send();
+}
+
+function getFormContents() {
+  formContents = document.getElementsByName('formContents')[0].value;
+  return formContents;
+}
+
+function search() {
+  searchTerm = getFormContents();
+  searchWiki(searchTerm);
 }
