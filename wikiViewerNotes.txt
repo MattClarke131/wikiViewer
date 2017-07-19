@@ -68,5 +68,6 @@ V. QUESTIONS
 VI. PROBLEMS
 ================================================================================
 1. The search button works, but hitting the enter key doesn't work.
+  Zack says not to use forms if I'm not using it for post/get requests
 2. The search button only works on every second push.
   2.SOLUTION: I moved the call for updateHTML inside the xhr.onload function
