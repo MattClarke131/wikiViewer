@@ -6,7 +6,7 @@ I.    GOALS
 II.   WIKIPEDIA API
 III.  WIKPEDIA API ETIQUETTE
 IV.   WALL: No 'Access-Control-Allow-Origin' header
-
+V.    QUESTIONS
 
 I. GOALS
 ================================================================================
@@ -53,3 +53,20 @@ People in this forum confirm: https://phabricator.wikimedia.org/T62835
 I read here: https://stackoverflow.com/questions/37106041/does-wikipedia-api-support-cors-or-only-jsonp-available
 Apparently it is possible if you just include "origin=*" in the url params.
 This works.
+
+
+V. QUESTIONS
+================================================================================
+1. How can I put "var searchResults" inside the searchWiki function?
+2. What are some good methods for rendering the search results in HTML?
+    2.1 Should I hard code the number of results in both HTML and JS?
+    2.2 Should I create n empty list elements?
+    2.3 Or Should I write a javascript function to manipulate the search Results
+        <div>?
+
+
+VI. PROBLEMS
+================================================================================
+1. The search button works, but hitting the enter key doesn't work.
+2. The search button only works on every second push.
+  2.SOLUTION: I moved the call for updateHTML inside the xhr.onload function

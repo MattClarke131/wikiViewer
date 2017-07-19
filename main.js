@@ -27,6 +27,7 @@ function searchWiki(searchTerm) {
   };
   xhr.onload = function() {
     searchResults = JSON.parse(xhr.responseText);
+    updateHTML();
   };
   xhr.onerror = function() {
     console.log("Error in CORS Request!");
@@ -43,3 +44,50 @@ function search() {
   searchTerm = getFormContents();
   searchWiki(searchTerm);
 }
+
+function updateHTML() {
+  hideAnchors();
+  populateLinks();
+  populateHeadings();
+  populateDescriptions();
+  revealAnchors();
+};
+
+function revealAnchors() {
+  var numberRevealed = searchResults[1].length;
+  var anchors = document.getElementsByClassName('searchResult');
+  for(i=0;i<numberRevealed;i++) {
+    anchors[i].removeAttribute('hidden');
+  }
+}
+
+function hideAnchors() {
+  var anchors = document.getElementsByClassName('searchResult');
+  for(i=0;i<anchors.length;i++) {
+    anchors[i].setAttribute('hidden', true);
+  }
+}
+
+function populateLinks() {
+  var links = searchResults[3];
+  var anchors = document.getElementsByClassName('searchResult');
+  for(i=0;i<links.length;i++) {
+    anchors[i].href = links[i];
+  };
+};
+
+function populateHeadings() {
+  var titles = searchResults[1];
+  var headings = document.getElementsByClassName('list-group-item-heading');
+  for(i=0;i<titles.length;i++) {
+    headings[i].innerHTML = titles[i];
+  };
+};
+
+function populateDescriptions() {
+  var descriptions = searchResults[2];
+  var pTags = document.getElementsByClassName('list-group-item-text')
+  for(i=0;i<descriptions.length;i++) {
+    pTags[i].innerHTML = descriptions[i];
+  }
+};
