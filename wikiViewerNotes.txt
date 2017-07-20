@@ -8,6 +8,7 @@ III.  WIKPEDIA API ETIQUETTE
 IV.   WALL: No 'Access-Control-Allow-Origin' header
 V.    QUESTIONS
 VI.   PROBLEMS
+VII.  PLAN: Use HTML template and render results with JS
 
 I. GOALS
 ================================================================================
@@ -72,3 +73,11 @@ VI. PROBLEMS
   Zack says not to use forms if I'm not using it for post/get requests
 2. The search button only works on every second push.
   2.SOLUTION: I moved the call for updateHTML inside the xhr.onload function
+
+
+VII.  PLAN: Use HTML template and render results with JS
+================================================================================
+1. Create function that clears results div
+2. Create function that retrieves template and modifies template
+3. Create function that populates searchResults div with empty templates
+4. Modify populate functions to populate empty templates.
