@@ -40,8 +40,9 @@ function getFormContents() {
   return formContents;
 }
 
-function search() {
-  searchTerm = getFormContents();
+function search(e) {
+  e.preventDefault();
+  var searchTerm = getFormContents();
   searchWiki(searchTerm);
 }
 
