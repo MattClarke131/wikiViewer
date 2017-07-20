@@ -18,7 +18,6 @@ function createCORSRequest(method, url) {
 };
 
 // I'm not sure how to put this variable inside searchWiki
-var searchResults;
 function searchWiki(searchTerm) {
   var xhr = createCORSRequest('GET', 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&format=json&search='+searchTerm+'&namespace=0&limit=10')
 
@@ -26,8 +25,9 @@ function searchWiki(searchTerm) {
     throw new Error('CORS not supported');
   };
   xhr.onload = function() {
-    searchResults = JSON.parse(xhr.responseText);
-    updateHTML();
+    var searchResults= JSON.parse(xhr.responseText);
+    var numResults = searchResults[1].length;
+    updateHTML(numResults, searchResults)
   };
   xhr.onerror = function() {
     console.log("Error in CORS Request!");
@@ -46,48 +46,52 @@ function search(e) {
   searchWiki(searchTerm);
 }
 
-function updateHTML() {
-  hideAnchors();
-  populateLinks();
-  populateHeadings();
-  populateDescriptions();
-  revealAnchors();
-};
+function updateHTML(amountOfResults, searchResults) {
+  clearResults();
+  populateAnchors(amountOfResults);
+  populateLinks(searchResults);
+  populateHeadings(searchResults);
+  populateDescriptions(searchResults);
+}
 
-function revealAnchors() {
-  var numberRevealed = searchResults[1].length;
-  var anchors = document.getElementsByClassName('searchResult');
-  for(i=0;i<numberRevealed;i++) {
-    anchors[i].removeAttribute('hidden');
+
+function clearResults() {
+  document.getElementById("results").innerHTML = "";
+}
+
+function createNewAnchor() {
+  var newAnchor = document.getElementById("searchResultTemplate").cloneNode("true");
+  newAnchor.removeAttribute("hidden");
+  newAnchor.removeAttribute("id");
+  newAnchor.classList.add("searchResult");
+  return newAnchor;
+}
+
+function populateAnchors(amount) {
+  for(i=0;i<amount;i++) {
+    document.getElementById("results").appendChild(createNewAnchor());
   }
 }
 
-function hideAnchors() {
-  var anchors = document.getElementsByClassName('searchResult');
-  for(i=0;i<anchors.length;i++) {
-    anchors[i].setAttribute('hidden', true);
-  }
-}
-
-function populateLinks() {
+function populateLinks(searchResults) {
   var links = searchResults[3];
-  var anchors = document.getElementsByClassName('searchResult');
+  var anchors = document.getElementById("results").getElementsByClassName('searchResult');
   for(i=0;i<links.length;i++) {
     anchors[i].href = links[i];
   };
 };
 
-function populateHeadings() {
+function populateHeadings(searchResults) {
   var titles = searchResults[1];
-  var headings = document.getElementsByClassName('list-group-item-heading');
+  var headings = document.getElementById("results").getElementsByClassName('list-group-item-heading');
   for(i=0;i<titles.length;i++) {
     headings[i].innerHTML = titles[i];
   };
 };
 
-function populateDescriptions() {
+function populateDescriptions(searchResults) {
   var descriptions = searchResults[2];
-  var pTags = document.getElementsByClassName('list-group-item-text')
+  var pTags = document.getElementById("results").getElementsByClassName('list-group-item-text')
   for(i=0;i<descriptions.length;i++) {
     pTags[i].innerHTML = descriptions[i];
   }
