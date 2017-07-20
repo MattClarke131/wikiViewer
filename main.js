@@ -35,14 +35,9 @@ function searchWiki(searchTerm) {
   xhr.send();
 }
 
-function getFormContents() {
-  formContents = document.getElementsByName('formContents')[0].value;
-  return formContents;
-}
-
 function search(e) {
   e.preventDefault();
-  var searchTerm = getFormContents();
+  var searchTerm = document.getElementsByName('searchField')[0].value;
   searchWiki(searchTerm);
 }
 
