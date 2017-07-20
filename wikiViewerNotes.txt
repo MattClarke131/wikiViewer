@@ -7,6 +7,7 @@ II.   WIKIPEDIA API
 III.  WIKPEDIA API ETIQUETTE
 IV.   WALL: No 'Access-Control-Allow-Origin' header
 V.    QUESTIONS
+VI.   PROBLEMS
 
 I. GOALS
 ================================================================================

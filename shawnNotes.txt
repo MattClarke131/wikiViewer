@@ -1,0 +1,19 @@
+Shawn's Code Review of wikiViewer
+================================================================================
+1. The repeated anchor tags are ugly. DO try to use javascript to copy and populate
+a template.
+
+2. Reduce the amount of "state" in code.
+  2.1. Global variables are bad (functional programming paradigm);
+  2.2. Use Function parameters to make pure functions.
+  e.g. move searchResults into functions.
+
+3. Escape url parameter searchTerm (& in searcTerm messes with the function)
+  3.1. Escape searchResults contents
+  3.2. InnerHTML is a good indicator that you need to escape
+
+4. Rename "form" and "formContents" variables.
+  4.1. Having well named variables is beneficial
+
+5. Declare character encoding at the top of the head with:
+  5.1. <meta charset="utf-8">
