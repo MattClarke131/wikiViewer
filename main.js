@@ -19,6 +19,10 @@ function createCORSRequest(method, url) {
 
 // I'm not sure how to put this variable inside searchWiki
 function searchWiki(searchTerm) {
+  searchTerm = sanitizeSearchTerm(searchTerm);
+  if (searchTerm == '') {
+    return;
+  }
   var xhr = createCORSRequest('GET', 'https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&format=json&search='+searchTerm+'&namespace=0&limit=10')
 
   if(!xhr) {
@@ -33,6 +37,10 @@ function searchWiki(searchTerm) {
     console.log("Error in CORS Request!");
   }
   xhr.send();
+}
+
+function sanitizeSearchTerm(searchTerm) {
+  return searchTerm.replace(/\W/g, '')
 }
 
 function search(e) {
