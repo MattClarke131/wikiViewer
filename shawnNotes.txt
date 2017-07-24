@@ -8,7 +8,7 @@ a template.
   2.2. Use Function parameters to make pure functions.
   e.g. move searchResults into functions.
 
-3. Escape url parameter searchTerm (& in searcTerm messes with the function)
+3. Escape url parameter searchTerm (& in searchTerm messes with the function)
   3.1. Escape searchResults contents
   3.2. InnerHTML is a good indicator that you need to escape
 

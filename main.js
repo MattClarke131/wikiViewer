@@ -17,7 +17,6 @@ function createCORSRequest(method, url) {
   return xhr;
 };
 
-// I'm not sure how to put this variable inside searchWiki
 function searchWiki(searchTerm) {
   searchTerm = sanitizeSearchTerm(searchTerm);
   if (searchTerm == '') {
@@ -37,17 +36,17 @@ function searchWiki(searchTerm) {
     console.log("Error in CORS Request!");
   }
   xhr.send();
-}
+};
 
 function sanitizeSearchTerm(searchTerm) {
   return searchTerm.replace(/\W/g, '')
-}
+};
 
 function search(e) {
   e.preventDefault();
   var searchTerm = document.getElementsByName('searchField')[0].value;
   searchWiki(searchTerm);
-}
+};
 
 function updateHTML(amountOfResults, searchResults) {
   clearResults();
@@ -55,12 +54,11 @@ function updateHTML(amountOfResults, searchResults) {
   populateLinks(searchResults);
   populateHeadings(searchResults);
   populateDescriptions(searchResults);
-}
-
+};
 
 function clearResults() {
   document.getElementById("results").innerHTML = "";
-}
+};
 
 function createNewAnchor() {
   var newAnchor = document.getElementById("searchResultTemplate").cloneNode("true");
@@ -68,13 +66,13 @@ function createNewAnchor() {
   newAnchor.removeAttribute("id");
   newAnchor.classList.add("searchResult");
   return newAnchor;
-}
+};
 
 function populateAnchors(amount) {
   for(i=0;i<amount;i++) {
     document.getElementById("results").appendChild(createNewAnchor());
   }
-}
+};
 
 function populateLinks(searchResults) {
   var links = searchResults[3];
